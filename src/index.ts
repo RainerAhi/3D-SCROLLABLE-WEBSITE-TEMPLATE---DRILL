@@ -68,7 +68,7 @@ async function setupViewer(){
     })
 
     importer.addEventListener("onLoad", (event) => {
-        gsap.to('.loader', {x: '100%', duration: 0.8, ease: 'power4.inOut', delay: 1, onComplete: () =>{
+        gsap.to('.loader', {opacity: 0, delay: 1, onComplete: () =>{
             document.body.style.overflowY = 'auto'
         }})
     })
@@ -84,9 +84,12 @@ async function setupViewer(){
     viewer.scene.activeCamera.setCameraOptions({controlsEnabled: false})
 
     if(isMobile) {
-        position.set(-2.44, -2.57, 5.43)
+        position.set(-3.10, -3.46, 7.45)
         target.set(-0.51, -0.01, -0.42)
+        camera.setCameraOptions({fov: 30})
     }
+
+    window.scrollTo(0, 0)
     
     function setupScrollanimation() {
 
@@ -95,7 +98,7 @@ async function setupViewer(){
         // First Section
 
         tl
-        .to(position, {x:  1.8, y: -3, z: -4.6,
+        .to(position, {x: isMobile ? -4 : 1.8, y: isMobile ? 6.06 : -3, z: isMobile ? -2.72 : -4.6,
             scrollTrigger: {
                 trigger: ".second",
                 start:"top bottom",
@@ -110,7 +113,7 @@ async function setupViewer(){
                 end: "top 80%", scrub: 1,
                 immediateRender: false
         }})
-        .to(target, {x: -0.5, y: 1.44 , z: -0.31,
+        .to(target, {x: isMobile ? -0.75 : -0.5, y: isMobile ? 0.08 : 1.44 , z: isMobile ? 0.04 : -0.31,
             scrollTrigger: {
                 trigger: ".second",
                 start:"top bottom",
